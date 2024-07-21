@@ -9,6 +9,13 @@ function add(numbers) {
 
     let delimiter = /,|\n/; // Default delimiters: comma and newline
 
+      // Check for custom delimiter syntax at the beginning of the string
+      if (numbers.startsWith('//')) {
+        const delimiterEndIndex = numbers.indexOf('\n');
+        delimiter = new RegExp(numbers.slice(2, delimiterEndIndex));
+        numbers = numbers.slice(delimiterEndIndex + 1);
+    }
+
     // Split the input string by the determined delimiter
     const numberArray = numbers.split(delimiter).map(num => parseInt(num, 10));
 
